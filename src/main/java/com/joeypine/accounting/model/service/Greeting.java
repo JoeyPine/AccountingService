@@ -1,4 +1,4 @@
-package com.joeypine.accounting.model;
+package com.joeypine.accounting.model.service;
 
 public class Greeting {
     private final Long id;

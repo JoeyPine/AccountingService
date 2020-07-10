@@ -1,6 +1,6 @@
-package com.joeypine.accounting.controllers;
+package com.joeypine.accounting.controller;
 
-import com.joeypine.accounting.model.Greeting;
+import com.joeypine.accounting.model.service.Greeting;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
