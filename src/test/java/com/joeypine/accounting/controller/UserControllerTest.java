@@ -101,7 +101,10 @@ public class UserControllerTest {
                 .andExpect(content().contentType("application/json"))
                 .andExpect(content().string("{\"code\":\"USER_INFO_NOT_FOUNDE\",\"errorType\":\"Client\",\"message\":\"The user is 100 is invalid\",\"statusCode\":404}"));
 
+//        verify(userInfoManager, never()).getUserInfoByUserId(userId);
     }
+
+
 
 }
 

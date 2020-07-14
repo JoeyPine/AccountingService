@@ -4,7 +4,6 @@ import com.joeypine.accounting.converter.p2c.UserInfoP2CConverter;
 import com.joeypine.accounting.dao.UserInfoDAO;
 import com.joeypine.accounting.exception.ResourceNotFoundException;
 import com.joeypine.accounting.model.common.UserInfo;
-import lombok.val;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
@@ -25,9 +24,9 @@ public class UserInfoManagerImpl implements UserInfoManager {
 
     @Override
     public UserInfo getUserInfoByUserId(Long userId) {
-        val userInfo = Optional.ofNullable(userInfoDao.getUserInfoById(userId))
+        return Optional.ofNullable(userInfoDao.getUserInfoById(userId))
+                .map(userInfoP2CConverter::convert)
                 .orElseThrow(() -> new ResourceNotFoundException(
                         String.format("user %s not found", userId)));
-        return userInfoP2CConverter.convert(userInfo);
     }
 }
