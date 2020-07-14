@@ -12,7 +12,7 @@ public class HelloController {
 
     private AtomicLong countor = new AtomicLong();
 
-    @GetMapping("v1/greeting")
+    @GetMapping("v1.0/greeting")
     public Greeting sayHello(@RequestParam("name") String name) {
         return new Greeting(countor.incrementAndGet(), String.format("Hello,%s", name));
     }
