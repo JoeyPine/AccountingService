@@ -32,7 +32,7 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<UserInfo> getUserInfoByUserId(@PathVariable("id") Long userId) {
         log.debug("Get user info by id {}", userId);
-        if (userId == null || userId < 0l) {
+        if (userId == null || userId < 0L) {
             throw new InvalidParameterException(String.format("The user is %s is invalid", userId));
         }
         val userInfo = userInfoManager.getUserInfoByUserId(userId);

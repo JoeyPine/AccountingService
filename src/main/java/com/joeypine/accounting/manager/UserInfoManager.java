@@ -7,7 +7,7 @@ public interface UserInfoManager {
     /**
      * Get user infomation by user id
      * @param userId specific user id.
-     * @return
+     * @return null;
      */
     UserInfo getUserInfoByUserId(Long userId);
 }

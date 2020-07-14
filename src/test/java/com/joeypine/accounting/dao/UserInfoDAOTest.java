@@ -23,12 +23,12 @@ public class UserInfoDAOTest {
     private UserInfoDAO userInfoDAO;
 
     @BeforeEach
-    public void setup(){
-        userInfoDAO  = new UserInfoDAOImpl(userInfoMapper);
+    public void setup() {
+        userInfoDAO = new UserInfoDAOImpl(userInfoMapper);
     }
 
     @Test
-    public void testGetUserInfoById(){
+    public void testGetUserInfoById() {
         //arrange
         val userId = 100L;
         val username = "test";
@@ -45,10 +45,10 @@ public class UserInfoDAOTest {
         doReturn(userInfo).when(userInfoMapper).getUserInfoByUserId(userId);
 
         //act
-        val result =userInfoDAO.getUserInfoById(userId);
+        val result = userInfoDAO.getUserInfoById(userId);
 
         //assert
-        assertEquals(userInfo,result);
+        assertEquals(userInfo, result);
 
         verify(userInfoMapper).getUserInfoByUserId(userId);
     }

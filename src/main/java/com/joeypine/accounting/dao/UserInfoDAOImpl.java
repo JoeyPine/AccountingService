@@ -1,7 +1,6 @@
 package com.joeypine.accounting.dao;
 
 import com.joeypine.accounting.dao.mapper.UserInfoMapper;
-import com.joeypine.accounting.manager.UserInfoManager;
 import com.joeypine.accounting.model.persistence.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

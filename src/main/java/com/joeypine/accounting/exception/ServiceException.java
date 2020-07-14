@@ -1,7 +1,6 @@
 package com.joeypine.accounting.exception;
 
 import lombok.Data;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 
 /**
  * Accounting Service Exception

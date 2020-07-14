@@ -12,20 +12,20 @@ import java.util.Optional;
 @Component
 public class UserInfoManagerImpl implements UserInfoManager {
 
-    private final UserInfoDAO userInfoDAO;
+    private final UserInfoDAO userInfoDao;
     private final UserInfoP2CConverter userInfoP2CConverter;
 
     //构造器注入
-    public UserInfoManagerImpl(final UserInfoDAO userInfoDAO,
+    public UserInfoManagerImpl(final UserInfoDAO userInfoDao,
                                final UserInfoP2CConverter userInfoP2CConverter) {
-        this.userInfoDAO = userInfoDAO;
+        this.userInfoDao = userInfoDao;
         this.userInfoP2CConverter = userInfoP2CConverter;
     }
 
 
     @Override
     public UserInfo getUserInfoByUserId(Long userId) {
-        val userInfo = Optional.ofNullable(userInfoDAO.getUserInfoById(userId))
+        val userInfo = Optional.ofNullable(userInfoDao.getUserInfoById(userId))
                 .orElseThrow(() -> new ResourceNotFoundException(
                         String.format("user %s not found", userId)));
         return userInfoP2CConverter.convert(userInfo);
