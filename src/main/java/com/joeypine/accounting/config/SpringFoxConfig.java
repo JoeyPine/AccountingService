@@ -14,6 +14,7 @@ public class SpringFoxConfig {
 
     /**
      * The bean for Docket.
+     *
      * @return Docket bean instance.
      */
     @Bean
