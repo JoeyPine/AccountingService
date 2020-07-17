@@ -8,10 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 // hostname:port/v1/users/...
 @RestController
@@ -30,16 +27,24 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserInfo> getUserInfoByUserId(@PathVariable("id")  Long userId) {
+    public ResponseEntity<UserInfo> getUserInfoByUserId(@PathVariable("id") Long userId) {
         log.debug("Get user info by id {}", userId);
         if (userId == null || userId < 0L) {
             throw new InvalidParameterException(String.format("The user is %s is invalid", userId));
         }
         val userInfo = userInfoManager.getUserInfoByUserId(userId);
-        val userInfoToReturn  = userInfoC2SConverter.convert(userInfo);
+        val userInfoToReturn = userInfoC2SConverter.convert(userInfo);
         assert userInfoToReturn != null;
         return ResponseEntity.ok(userInfoToReturn);
     }
 
+    @PostMapping()
+    public ResponseEntity<UserInfo> register(@RequestParam("username") String username,
+                                             @RequestParam("password") String password) {
+        val userInfo = userInfoManager.register(username, password);
+        val userInfoService = userInfoC2SConverter.convert(userInfo);
+        assert userInfoService != null;
+        return ResponseEntity.ok(userInfoService);
+    }
 
 }

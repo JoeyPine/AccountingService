@@ -21,7 +21,12 @@ public class UserInfoDAOImpl implements UserInfoDAO {
     }
 
     @Override
-    public void createNewUser(String username, String password) {
+    public UserInfo getUserInfoByUserName(String username) {
+        return userInfoMapper.getUserInfoByUserName(username);
+    }
 
+    @Override
+    public void createNewUser(UserInfo userInfo) {
+        userInfoMapper.createNewUser(userInfo);
     }
 }

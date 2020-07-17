@@ -1,6 +1,7 @@
 package com.joeypine.accounting.exception;
 
 import lombok.val;
+import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -22,4 +23,15 @@ public class GlobalExceptionHandler {
                 .body(errorResponse);
     }
 
+    @ExceptionHandler(IncorrectCredentialsException.class)
+    ResponseEntity<?> handleIncorrectCredentialsException(IncorrectCredentialsException ex) {
+        val errorResponse = ErrorResponse.builder()
+                .statusCode(400)
+                .message(ex.getMessage())
+                .code("INCORRECT_CREDENTIALS")
+                .errorType(ServiceException.ErrorType.Client)
+                .build();
+
+        return ResponseEntity.status(400).body(errorResponse);
+    }
 }

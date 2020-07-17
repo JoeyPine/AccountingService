@@ -5,6 +5,9 @@ import com.joeypine.accounting.model.persistence.UserInfo;
 public interface UserInfoDAO {
 
     UserInfo getUserInfoById(Long id);
+    UserInfo getUserInfoByUserName(String username);
 
-    void createNewUser(String username, String password);
+    void createNewUser(UserInfo userInfo);
+
+
 }

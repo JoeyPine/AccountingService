@@ -3,3 +3,7 @@ spring:
     url: jdbc:mysql://localhost:3306/account_test?userUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
     username: root
     password: root
+
+logging:
+  level:
+    com.joeypine.accounting: DEBUG
