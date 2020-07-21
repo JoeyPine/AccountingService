@@ -1,5 +1,6 @@
 package com.joeypine.accounting.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.joeypine.accounting.converter.c2s.UserInfoC2SConverter;
 import com.joeypine.accounting.exception.GlobalExceptionHandler;
 import com.joeypine.accounting.exception.ResourceNotFoundException;
@@ -77,10 +78,11 @@ public class UserControllerTest {
 
         //Act && Assert
 
-        mockMvc.perform(get("/v1.0/users/" + userId))
+        mockMvc.perform(get("/v1.0/users/" + userId)
+                .contentType("application/json"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json"))
-                .andExpect(content().string("{\"id\":100,\"username\":\"test\",\"password\":\"test\"}"));
+                .andExpect(content().string(new ObjectMapper().writeValueAsString(userInfo)));
 
         verify(userInfoManager).getUserInfoByUserId(anyLong());
         verify(userInfoC2SConverter).convert(userInfoInCommon);
@@ -96,14 +98,16 @@ public class UserControllerTest {
                 .getUserInfoByUserId(anyLong());
 
         //Act && Assert
-        mockMvc.perform(get("/v1.0/users/" + userId))
+        mockMvc.perform(get("/v1.0/users/" + userId)
+                .contentType("application/json"))
                 .andExpect(status().is4xxClientError())
                 .andExpect(content().contentType("application/json"))
-                .andExpect(content().string("{\"code\":\"USER_INFO_NOT_FOUNDE\",\"errorType\":\"Client\",\"message\":\"The user is 100 is invalid\",\"statusCode\":404}"));
+                .andExpect(content().string(
+                        "{\"code\":\"Resourse_NOT_FOUNDE\",\"errorType\":\"Client\",\"message\":\"The user is 100 is invalid\",\"statusCode\":404}"
+                ));
 
 //        verify(userInfoManager, never()).getUserInfoByUserId(userId);
     }
-
 
 
 }

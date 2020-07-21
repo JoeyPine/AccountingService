@@ -22,7 +22,8 @@ public class HelloControllerTest {
     @Test
     public void testSayHello() throws Exception {
         //Arrange & Act & Assert
-        mockMvc.perform(get("/v1.0/greeting").param("name", "World"))
+        mockMvc.perform(get("/v1.0/greeting").contentType("application/json")
+                .param("name", "World"))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.content().string("{\"id\":1,\"name\":\"Hello,World\"}"));
     }

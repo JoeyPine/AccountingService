@@ -1,10 +1,7 @@
 package com.joeypine.accounting.dao.mapper;
 
 import com.joeypine.accounting.model.persistence.UserInfo;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 @Mapper
 public interface UserInfoMapper {
@@ -15,7 +12,9 @@ public interface UserInfoMapper {
     @Select("SELECT id , username , password , salt , create_time , update_time FROM as_userinfo where username = #{username }")
     UserInfo getUserInfoByUserName(@Param("username") String username);
 
+
+    @Options(useGeneratedKeys = true, keyProperty = "id")
     @Insert("INSERT into as_userinfo(username , password , salt , create_time)" +
             " VALUES(#{username} , #{password} , #{salt} , #{createTime})")
-    void createNewUser(UserInfo userInfo);
+    int createNewUser(UserInfo userInfo);
 }

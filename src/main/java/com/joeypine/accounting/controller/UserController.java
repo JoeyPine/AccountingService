@@ -38,13 +38,27 @@ public class UserController {
         return ResponseEntity.ok(userInfoToReturn);
     }
 
-    @PostMapping()
-    public ResponseEntity<UserInfo> register(@RequestParam("username") String username,
-                                             @RequestParam("password") String password) {
-        val userInfo = userInfoManager.register(username, password);
-        val userInfoService = userInfoC2SConverter.convert(userInfo);
-        assert userInfoService != null;
-        return ResponseEntity.ok(userInfoService);
+//    @PostMapping()
+//    public ResponseEntity<UserInfo> register(@RequestParam("username") String username,
+//                                             @RequestParam("password") String password) {
+//        val userInfo = userInfoManager.register(username, password);
+//        val userInfoService = userInfoC2SConverter.convert(userInfo);
+//        assert userInfoService != null;
+//        return ResponseEntity.ok(userInfoService);
+//    }
+
+    /**
+     * Register with username and passwrod
+     *
+     * @param userinfo userInfo
+     * @return The response for register
+     */
+    @PostMapping(produces = "application/json", consumes = "application/json")
+    public ResponseEntity<UserInfo> register2(@RequestBody com.joeypine.accounting.model.common.UserInfo userinfo) {
+        val userInfoToReturn = userInfoC2SConverter.convert(
+                userInfoManager.register(userinfo.getUsername(), userinfo.getPassword()));
+        assert userInfoToReturn != null;
+        return ResponseEntity.ok(userInfoToReturn);
     }
 
 }
